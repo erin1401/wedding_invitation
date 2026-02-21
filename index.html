@@ -6,239 +6,88 @@
 
 <title>Wedding Invitation</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
-<style>
-/* =========================
-   ULTRA LUXURY BALLROOM STYLE
-========================= */
-
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  color:white;
-  overflow-x:hidden;
-
-  background:
-    radial-gradient(circle at 50% 30%, rgba(255,215,180,0.35), transparent 50%),
-    linear-gradient(160deg,#1a0f12,#3d2327,#1a0f12);
-}
-
-/* gold shimmer animation */
-body::before{
-  content:"";
-  position:fixed;
-  width:200%;
-  height:200%;
-  background:linear-gradient(120deg,transparent,rgba(255,215,180,.2),transparent);
-  animation:shine 10s linear infinite;
-}
-
-@keyframes shine{
-  0%{transform:translateX(-50%)}
-  100%{transform:translateX(50%)}
-}
-
-/* sections */
-section{
-  padding:100px 20px;
-  text-align:center;
-}
-
-/* headings */
-h1{
-  font-family:'Cinzel',serif;
-  font-size:52px;
-  letter-spacing:3px;
-  background:linear-gradient(45deg,#fff,#ffd9b3,#d4a373);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-h2{
-  font-family:'Cinzel',serif;
-  color:#ffd9b3;
-}
-
-/* card luxury */
-.card{
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:25px;
-  padding:35px;
-  max-width:650px;
-  margin:auto;
-  box-shadow:0 0 50px rgba(255,180,130,.2);
-}
-
-/* buttons */
-.btn{
-  background:linear-gradient(45deg,#d4a373,#ffd9b3);
-  border:none;
-  padding:12px 25px;
-  border-radius:30px;
-  cursor:pointer;
-  font-weight:bold;
-  color:#2b1b1f;
-}
-
-/* floating sparkles */
-.sparkle{
-  position:fixed;
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:white;
-  opacity:.7;
-  animation:float 6s linear infinite;
-}
-
-@keyframes float{
-  from{transform:translateY(100vh);opacity:0}
-  to{transform:translateY(-10vh);opacity:1}
-}
-
-/* inputs */
-input,textarea{
-  width:90%;
-  padding:10px;
-  border-radius:10px;
-  border:none;
-  margin:6px;
-}
-
-/* guest list */
-#list{
-  text-align:left;
-  margin-top:15px;
-}
-
-/* countdown */
-#countdown{
-  font-size:26px;
-  margin-top:10px;
-  color:#ffd9b3;
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- Musik -->
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_2.mp3" type="audio/mpeg">
+<!-- ================= GATE OPENING ================= -->
+<div id="gate">
+  <div class="door leftDoor"></div>
+  <div class="door rightDoor"></div>
+  <div class="glow"></div>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_keroncong-gamelan.mp3">
 </audio>
 
-<!-- sparkles -->
-<script>
-for(let i=0;i<40;i++){
- let s=document.createElement('div');
- s.className='sparkle';
- s.style.left=Math.random()*100+'vw';
- s.style.animationDuration=(4+Math.random()*6)+'s';
- document.body.appendChild(s);
-}
-</script>
-
+<!-- WAYANG -->
+<img class="wayang left" src="https://i.imgur.com/NV8pO3g.png">
+<img class="wayang right" src="https://i.imgur.com/NV8pO3g.png">
 
 <!-- HERO -->
-<section>
-<h1>Rama & Sinta</h1>
-<p>Kepada Yth:</p>
-<h2 id="guestName"></h2>
-<div id="countdown"></div>
+<section class="hero">
+  <h1>Rama & Sinta</h1>
+  <p class="kepada">Kepada Yth</p>
+  <h2 id="guestName"></h2>
+  <div id="countdown"></div>
 </section>
-
 
 <!-- ACARA -->
-<section>
-<div class="card">
-<h2>Wedding Ballroom</h2>
-<p>Hotel Grand Ballroom Jawa</p>
-<p>Minggu, 10 Agustus 2026</p>
-</div>
+<section class="section card">
+  <h2>Akad & Resepsi</h2>
+  <p>Minggu, 10 Agustus 2026</p>
+  <p>Ballroom Hotel</p>
 </section>
 
-
-<!-- MAPS -->
+<!-- GALERI -->
 <section>
-<h2>Lokasi</h2>
-<iframe
-width="90%" height="300"
-style="border-radius:20px"
-src="https://maps.google.com/maps?q=hotel&t=&z=15&ie=UTF8&iwloc=&output=embed">
-</iframe>
+  <h2>Gallery</h2>
+  <div class="gallery">
+    <img src="https://picsum.photos/400/600?1">
+    <img src="https://picsum.photos/400/600?2">
+    <img src="https://picsum.photos/400/600?3">
+  </div>
 </section>
 
+<!-- MAP -->
+<section>
+  <h2>Lokasi</h2>
+  <iframe
+  src="https://maps.google.com/maps?q=hotel&t=&z=15&ie=UTF8&iwloc=&output=embed"
+  width="90%" height="300"></iframe>
+</section>
+
+<!-- RSVP -->
+<section class="card">
+  <h2>RSVP</h2>
+  <button onclick="rsvp('Hadir')" class="btn">Hadir</button>
+  <button onclick="rsvp('Tidak')" class="btn">Tidak</button>
+  <p id="rsvpText"></p>
+</section>
 
 <!-- BUKU TAMU -->
-<section>
-<h2>Buku Tamu</h2>
-
-<div class="card">
-<input id="nama" placeholder="Nama"/>
-<textarea id="ucapan" placeholder="Ucapan"></textarea>
-<button class="btn" onclick="kirim()">Kirim</button>
-<div id="list"></div>
-</div>
+<section class="card">
+  <h2>Buku Tamu</h2>
+  <input id="nama" placeholder="Nama">
+  <textarea id="ucapan" placeholder="Ucapan"></textarea>
+  <button onclick="kirim()" class="btn">Kirim</button>
+  <div id="list"></div>
 </section>
 
-
-<!-- GENERATOR LINK -->
-<section>
-<h2>Generator Link Tamu</h2>
-<input id="gen" placeholder="Nama Tamu">
-<button class="btn" onclick="generate()">Generate</button>
-<p id="link"></p>
+<!-- GENERATOR -->
+<section class="card">
+  <h2>Generator Link</h2>
+  <input id="gen" placeholder="Nama Tamu">
+  <button onclick="generate()" class="btn">Generate</button>
+  <p id="link"></p>
 </section>
 
-
-<script>
-/* ===== ambil nama tamu dari url ===== */
-const params = new URLSearchParams(window.location.search);
-document.getElementById("guestName").innerText =
-params.get("to") || "Tamu Undangan";
-
-/* ===== countdown ===== */
-let target = new Date("April 04 2026 08:00:00").getTime();
-setInterval(()=>{
- let now=new Date().getTime();
- let d=target-now;
- let day=Math.floor(d/(1000*60*60*24));
- let hr=Math.floor((d%(1000*60*60*24))/(1000*60*60));
- let mn=Math.floor((d%(1000*60*60))/(1000*60));
- document.getElementById("countdown").innerText =
- day+" hari "+hr+" jam "+mn+" menit lagi";
-},1000);
-
-/* ===== buku tamu ===== */
-let data=JSON.parse(localStorage.getItem("guest"))||[];
-
-function show(){
- let list=document.getElementById("list");
- list.innerHTML="";
- data.forEach(d=>{
-   list.innerHTML+=`<p><b>${d.nama}</b> : ${d.ucapan}</p>`;
- });
-}
-show();
-
-function kirim(){
- let nama=document.getElementById("nama").value;
- let u=document.getElementById("ucapan").value;
- data.push({nama,ucapan:u});
- localStorage.setItem("guest",JSON.stringify(data));
- show();
-}
-
-/* ===== generator ===== */
-function generate(){
- let n=document.getElementById("gen").value;
- let url=location.origin+location.pathname+"?to="+encodeURIComponent(n);
- document.getElementById("link").innerText=url;
-}
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
