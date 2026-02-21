@@ -4,282 +4,239 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Luxury 3D Wedding Invitation</title>
+<title>Wedding Invitation</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --gold:#c9a24d;
-  --rose:#f3e7e3;
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+/* =========================
+   ULTRA LUXURY BALLROOM STYLE
+========================= */
 
 body{
-  font-family:'Playfair Display',serif;
-  background:#fff;
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  color:white;
   overflow-x:hidden;
-  perspective:1200px;
+
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255,215,180,0.35), transparent 50%),
+    linear-gradient(160deg,#1a0f12,#3d2327,#1a0f12);
 }
 
-/* ===================== */
-/* 3D HERO SCENE */
-/* ===================== */
-
-.scene{
-  height:100vh;
-  position:relative;
-  transform-style:preserve-3d;
-  overflow:hidden;
+/* gold shimmer animation */
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  background:linear-gradient(120deg,transparent,rgba(255,215,180,.2),transparent);
+  animation:shine 10s linear infinite;
 }
 
-/* background depth layers */
-.layer{
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center;
-  transform:translateZ(-200px) scale(1.4);
-  filter:brightness(.8);
+@keyframes shine{
+  0%{transform:translateX(-50%)}
+  100%{transform:translateX(50%)}
 }
 
-/* door animation */
-.door{
-  position:absolute;
-  inset:0;
-  display:flex;
-}
-
-.door div{
-  flex:1;
-  background:url("https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1920") center/cover;
-  transform-origin:left;
-}
-
-.left{
-  animation:openLeft 4s ease forwards;
-}
-
-.right{
-  animation:openRight 4s ease forwards;
-}
-
-@keyframes openLeft{
-  to{transform:rotateY(-90deg)}
-}
-@keyframes openRight{
-  to{transform:rotateY(90deg)}
-}
-
-/* title */
-.title{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  color:white;
-  text-align:center;
-}
-
-.title h1{
-  font-family:'Great Vibes';
-  font-size:64px;
-  color:var(--gold);
-  text-shadow:0 0 25px rgba(201,162,77,.6);
-}
-
-/* ===================== */
 /* sections */
-/* ===================== */
-
-.section{
-  padding:80px 20px;
+section{
+  padding:100px 20px;
   text-align:center;
-  opacity:0;
-  transform:translateY(40px);
-  transition:1.2s;
 }
 
-.section.show{
-  opacity:1;
-  transform:none;
+/* headings */
+h1{
+  font-family:'Cinzel',serif;
+  font-size:52px;
+  letter-spacing:3px;
+  background:linear-gradient(45deg,#fff,#ffd9b3,#d4a373);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
+h2{
+  font-family:'Cinzel',serif;
+  color:#ffd9b3;
+}
+
+/* card luxury */
 .card{
-  background:#fff;
-  padding:30px;
-  border-radius:20px;
-  max-width:500px;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:25px;
+  padding:35px;
+  max-width:650px;
   margin:auto;
-  box-shadow:0 12px 35px rgba(0,0,0,.08);
+  box-shadow:0 0 50px rgba(255,180,130,.2);
 }
 
-button{
-  background:var(--gold);
-  color:white;
+/* buttons */
+.btn{
+  background:linear-gradient(45deg,#d4a373,#ffd9b3);
   border:none;
-  padding:10px 18px;
+  padding:12px 25px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold;
+  color:#2b1b1f;
+}
+
+/* floating sparkles */
+.sparkle{
+  position:fixed;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:white;
+  opacity:.7;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);opacity:0}
+  to{transform:translateY(-10vh);opacity:1}
+}
+
+/* inputs */
+input,textarea{
+  width:90%;
+  padding:10px;
   border-radius:10px;
+  border:none;
   margin:6px;
 }
 
-/* ===================== */
-/* gallery 3D */
-/* ===================== */
-
-.gallery{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
+/* guest list */
+#list{
+  text-align:left;
+  margin-top:15px;
 }
 
-.gallery img{
-  height:190px;
-  border-radius:14px;
-  transition:.4s;
-}
-
-.gallery img:hover{
-  transform:scale(1.08);
-}
-
-/* petals */
-.petal{
-  position:fixed;
-  top:-10px;
-  width:12px;
-  height:12px;
-  background:#fff;
-  border-radius:50%;
-  opacity:.7;
-  animation:fall linear infinite;
-}
-
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg)}
-}
-
-#musicBtn{
-  position:fixed;
-  right:20px;
-  top:20px;
+/* countdown */
+#countdown{
+  font-size:26px;
+  margin-top:10px;
+  color:#ffd9b3;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 3D CINEMATIC SCENE -->
-<div class="scene">
-  <div class="layer"></div>
-
-  <div class="door">
-    <div class="left"></div>
-    <div class="right"></div>
-  </div>
-
-  <div class="title">
-    <h1>Wedding Day</h1>
-    <h2 id="guest"></h2>
-  </div>
-</div>
-
-
-<button id="musicBtn" onclick="toggleMusic()">🔊</button>
-
-<audio id="music" loop autoplay>
-<source src="https://cdn.pixabay.com/audio/2022/10/25/audio_9c9a9b5c06.mp3">
+<!-- Musik -->
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_2.mp3" type="audio/mpeg">
 </audio>
 
+<!-- sparkles -->
+<script>
+for(let i=0;i<40;i++){
+ let s=document.createElement('div');
+ s.className='sparkle';
+ s.style.left=Math.random()*100+'vw';
+ s.style.animationDuration=(4+Math.random()*6)+'s';
+ document.body.appendChild(s);
+}
+</script>
 
-<!-- COUNTDOWN -->
-<section class="section card">
-<h3>Menuju Hari Bahagia</h3>
-<h2 id="countdown"></h2>
+
+<!-- HERO -->
+<section>
+<h1>Rama & Sinta</h1>
+<p>Kepada Yth:</p>
+<h2 id="guestName"></h2>
+<div id="countdown"></div>
 </section>
 
-<!-- GALLERY -->
-<section class="section">
-<div class="gallery">
-<img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486">
-<img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde">
-<img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc">
+
+<!-- ACARA -->
+<section>
+<div class="card">
+<h2>Wedding Ballroom</h2>
+<p>Hotel Grand Ballroom Jawa</p>
+<p>Minggu, 10 Agustus 2026</p>
 </div>
 </section>
 
-<!-- RSVP -->
-<section class="section card">
-<button onclick="rsvp('Hadir')">Hadir</button>
-<button onclick="rsvp('Tidak Hadir')">Tidak Hadir</button>
-<p id="msg"></p>
+
+<!-- MAPS -->
+<section>
+<h2>Lokasi</h2>
+<iframe
+width="90%" height="300"
+style="border-radius:20px"
+src="https://maps.google.com/maps?q=hotel&t=&z=15&ie=UTF8&iwloc=&output=embed">
+</iframe>
 </section>
 
-<!-- WISH -->
-<section class="section card">
-<input id="wishName" placeholder="Nama">
-<textarea id="wishText" placeholder="Ucapan..."></textarea>
-<button onclick="sendWish()">Kirim</button>
+
+<!-- BUKU TAMU -->
+<section>
+<h2>Buku Tamu</h2>
+
+<div class="card">
+<input id="nama" placeholder="Nama"/>
+<textarea id="ucapan" placeholder="Ucapan"></textarea>
+<button class="btn" onclick="kirim()">Kirim</button>
+<div id="list"></div>
+</div>
 </section>
+
+
+<!-- GENERATOR LINK -->
+<section>
+<h2>Generator Link Tamu</h2>
+<input id="gen" placeholder="Nama Tamu">
+<button class="btn" onclick="generate()">Generate</button>
+<p id="link"></p>
+</section>
+
 
 <script>
-/* ===== typing guest ===== */
-const guestName=new URLSearchParams(location.search).get("to")||"Tamu Undangan";
-let i=0;
-function type(){
-  if(i<guestName.length){
-    guest.innerHTML+=guestName[i++];
-    setTimeout(type,60);
-  }
-}
-type();
-
-/* ===== reveal ===== */
-setTimeout(()=>{
-  document.querySelectorAll(".section").forEach((s,i)=>{
-    setTimeout(()=>s.classList.add("show"),i*500);
-  });
-},4500);
-
-/* ===== petals ===== */
-for(let i=0;i<25;i++){
-  const p=document.createElement("div");
-  p.className="petal";
-  p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(5+Math.random()*5)+"s";
-  document.body.appendChild(p);
-}
-
-/* ===== music ===== */
-const music=document.getElementById("music");
-function toggleMusic(){
-  music.paused?music.play():music.pause();
-}
+/* ===== ambil nama tamu dari url ===== */
+const params = new URLSearchParams(window.location.search);
+document.getElementById("guestName").innerText =
+params.get("to") || "Tamu Undangan";
 
 /* ===== countdown ===== */
-const target=new Date("2026-04-04").getTime();
+let target = new Date("April 04 2026 08:00:00").getTime();
 setInterval(()=>{
-  const d=Math.floor((target-Date.now())/86400000);
-  countdown.innerText=d+" hari lagi";
+ let now=new Date().getTime();
+ let d=target-now;
+ let day=Math.floor(d/(1000*60*60*24));
+ let hr=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+ let mn=Math.floor((d%(1000*60*60))/(1000*60));
+ document.getElementById("countdown").innerText =
+ day+" hari "+hr+" jam "+mn+" menit lagi";
 },1000);
 
-/* ===== Google Sheet ===== */
-const scriptURL="https://docs.google.com/spreadsheets/d/1fZl4YNjqMnePEVRAIrdlHMXLwOLKjCL7cUixdsdci9c/edit?gid=0#gid=0";
+/* ===== buku tamu ===== */
+let data=JSON.parse(localStorage.getItem("guest"))||[];
 
-function rsvp(status){
-  fetch(scriptURL,{method:"POST",body:JSON.stringify({type:"rsvp",nama:guestName,status})});
-  msg.innerText="Terima kasih 💛";
+function show(){
+ let list=document.getElementById("list");
+ list.innerHTML="";
+ data.forEach(d=>{
+   list.innerHTML+=`<p><b>${d.nama}</b> : ${d.ucapan}</p>`;
+ });
+}
+show();
+
+function kirim(){
+ let nama=document.getElementById("nama").value;
+ let u=document.getElementById("ucapan").value;
+ data.push({nama,ucapan:u});
+ localStorage.setItem("guest",JSON.stringify(data));
+ show();
 }
 
-function sendWish(){
-  fetch(scriptURL,{method:"POST",body:JSON.stringify({type:"wish",nama:wishName.value,pesan:wishText.value})});
-  alert("Terkirim");
+/* ===== generator ===== */
+function generate(){
+ let n=document.getElementById("gen").value;
+ let url=location.origin+location.pathname+"?to="+encodeURIComponent(n);
+ document.getElementById("link").innerText=url;
 }
 </script>
 
