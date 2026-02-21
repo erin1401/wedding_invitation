@@ -7,20 +7,26 @@
 <title>Wedding Invitation</title>
 
 <style>
+:root{
+  --gold:#c9a24d;
+  --rose:#e9d8d0;
+  --white:#ffffff;
+}
+
 *{
   margin:0;
   padding:0;
-  box-sizing:border-box;
   font-family:'Segoe UI',sans-serif;
+  box-sizing:border-box;
 }
 
 body{
-  background:#f5f3ef;
-  color:#333;
+  background:linear-gradient(135deg,var(--rose),#fff);
+  color:#444;
   overflow-x:hidden;
 }
 
-/* ===== OPENING CINEMATIC ===== */
+/* ===== OPENING ===== */
 #opening{
   position:fixed;
   inset:0;
@@ -29,109 +35,109 @@ body{
   justify-content:center;
   align-items:center;
   color:white;
-  z-index:10;
-  transition:1.2s;
+  z-index:1000;
 }
 
 #opening button{
-  padding:14px 28px;
+  background:var(--gold);
   border:none;
+  padding:14px 30px;
   border-radius:30px;
-  background:#c9a24d;
   color:white;
-  font-size:16px;
 }
 
-/* ===== MAIN ===== */
+/* ===== SECTION ===== */
 .section{
   padding:70px 20px;
   text-align:center;
 }
 
 .card{
-  background:white;
+  background:var(--white);
   padding:25px;
   border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
-  max-width:450px;
+  max-width:500px;
   margin:auto;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+
+button{
+  background:var(--gold);
+  border:none;
+  color:white;
+  padding:10px 18px;
+  border-radius:10px;
+  margin:6px;
 }
 
 /* ===== GALLERY ===== */
 .gallery{
   display:flex;
+  gap:10px;
   overflow-x:auto;
-  gap:12px;
 }
 
 .gallery img{
-  height:200px;
-  border-radius:15px;
+  height:180px;
+  border-radius:12px;
 }
 
-/* ===== BUTTON ===== */
-button{
-  background:#c9a24d;
-  border:none;
-  padding:10px 18px;
-  border-radius:10px;
-  color:white;
-  margin:6px;
+/* ===== ADMIN ===== */
+#admin{
+  display:none;
+  padding:20px;
+  background:white;
+  margin:30px;
+  border-radius:12px;
 }
 
-/* music btn */
+textarea,input{
+  width:100%;
+  padding:8px;
+  margin:5px 0;
+}
+
 #musicBtn{
   position:fixed;
-  top:20px;
   right:20px;
+  top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== CINEMATIC OPEN ===== -->
+<!-- OPENING -->
 <div id="opening">
-  <div>
-    <h2>You're Invited</h2>
-    <br>
-    <button onclick="start()">Buka Undangan</button>
-  </div>
+  <button onclick="start()">Buka Undangan</button>
 </div>
 
 <button id="musicBtn" onclick="toggleMusic()">🔊</button>
 
-<audio id="music" loop>
+<audio id="music" loop autoplay>
   <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_9c9a9b5c06.mp3">
 </audio>
 
-
-<!-- ===== HERO ===== -->
+<!-- HERO -->
 <section class="section">
-  <h1>Wedding Day</h1>
-  <h2 id="guestName"></h2>
+  <h1 style="color:#c9a24d">Wedding Day</h1>
+  <h2 id="guest"></h2>
 </section>
 
-
-<!-- ===== COUNTDOWN ===== -->
+<!-- COUNTDOWN -->
 <section class="section card">
   <h3>Menuju Hari Bahagia</h3>
   <h2 id="countdown"></h2>
 </section>
 
-
-<!-- ===== EVENT ===== -->
+<!-- EVENT -->
 <section class="section card">
-  <h3>Akad & Resepsi</h3>
-  <p>Minggu, 12 Januari 2026</p>
+  <p>12 Januari 2026</p>
   <p>Gedung Serbaguna Bahagia</p>
 </section>
 
-
-<!-- ===== GALLERY ===== -->
+<!-- GALLERY -->
 <section class="section">
-  <h3>Our Moments</h3>
-  <br>
   <div class="gallery">
     <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486">
     <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde">
@@ -139,8 +145,15 @@ button{
   </div>
 </section>
 
+<!-- MAP -->
+<section class="section card">
+  <h3>Lokasi</h3>
+  <iframe
+  src="https://maps.google.com/maps?q=jakarta&t=&z=13&ie=UTF8&iwloc=&output=embed"
+  width="100%" height="250" style="border-radius:12px;border:0"></iframe>
+</section>
 
-<!-- ===== RSVP ===== -->
+<!-- RSVP -->
 <section class="section card">
   <h3>Konfirmasi Kehadiran</h3>
   <button onclick="rsvp('Hadir')">Hadir</button>
@@ -148,68 +161,99 @@ button{
   <p id="msg"></p>
 </section>
 
-
-<!-- ===== WHATSAPP ===== -->
-<section class="section">
-  <button onclick="shareWA()">Bagikan via WhatsApp</button>
+<!-- BUKU TAMU -->
+<section class="section card">
+  <h3>Ucapan & Doa</h3>
+  <input id="wishName" placeholder="Nama">
+  <textarea id="wishText" placeholder="Tulis ucapan..."></textarea>
+  <button onclick="sendWish()">Kirim</button>
 </section>
 
+<!-- ADMIN LOGIN -->
+<section class="section">
+  <button onclick="login()">Admin</button>
+</section>
 
+<div id="admin">
+  <h3>Generator Link Tamu</h3>
+  <textarea id="names" placeholder="Andi&#10;Ibu Sari"></textarea>
+  <button onclick="generate()">Generate Link</button>
+  <div id="links"></div>
+</div>
 
 <script>
-/* ===== GUEST NAME ===== */
+/* ===== SETUP ===== */
 const params=new URLSearchParams(location.search);
 const guest=params.get("to")||"Tamu Undangan";
-document.getElementById("guestName").innerText=guest;
+document.getElementById("guest").innerText=guest;
 
+/* GANTI DENGAN URL GOOGLE APPS SCRIPT */
+const scriptURL="PASTE_URL_WEB_APP_DISINI";
 
-/* ===== OPENING EFFECT ===== */
+/* ===== OPENING ===== */
 function start(){
-  document.getElementById("opening").style.opacity=0;
-  setTimeout(()=>opening.remove(),1000);
+  document.getElementById("opening").style.display="none";
   music.play();
 }
-
 
 /* ===== MUSIC ===== */
 const music=document.getElementById("music");
 function toggleMusic(){
-  if(music.paused){music.play()}
-  else{music.pause()}
+  music.paused?music.play():music.pause();
 }
-
 
 /* ===== COUNTDOWN ===== */
 const target=new Date("2026-01-12").getTime();
 setInterval(()=>{
-  const now=new Date().getTime();
-  const d=Math.floor((target-now)/86400000);
+  const d=Math.floor((target-Date.now())/86400000);
   document.getElementById("countdown").innerText=d+" hari lagi";
 },1000);
 
-
-/* ===== RSVP GOOGLE SHEET ===== */
-/* ganti URL ini dengan Apps Script kamu */
-const scriptURL="PASTE_URL_WEB_APP_DISINI";
-
+/* ===== RSVP ===== */
 function rsvp(status){
   fetch(scriptURL,{
     method:"POST",
     body:JSON.stringify({
+      type:"rsvp",
       nama:guest,
-      status:status,
-      waktu:new Date()
+      status:status
     })
-  }).then(()=>{
-    document.getElementById("msg").innerText="Terima kasih atas konfirmasi 💛";
   });
+  msg.innerText="Terima kasih 💛";
 }
 
+/* ===== WISH ===== */
+function sendWish(){
+  fetch(scriptURL,{
+    method:"POST",
+    body:JSON.stringify({
+      type:"wish",
+      nama:wishName.value,
+      pesan:wishText.value
+    })
+  });
+  alert("Ucapan terkirim");
+}
 
-/* ===== SHARE WA ===== */
-function shareWA(){
-  const msg=`Halo ${guest}, ini undangan pernikahan kami:\n${location.href}`;
-  window.open("https://wa.me/?text="+encodeURIComponent(msg));
+/* ===== ADMIN LOGIN ===== */
+function login(){
+  const pass=prompt("Password admin:");
+  if(pass==="1234"){   /* ganti password */
+    admin.style.display="block";
+  }
+}
+
+/* ===== GENERATOR ===== */
+function generate(){
+  const base=location.origin+location.pathname+"?to=";
+  const names=document.getElementById("names").value.split("\n");
+  let html="";
+  names.forEach(n=>{
+    if(!n.trim()) return;
+    const link=base+encodeURIComponent(n);
+    html+=`<p>${n}<br><a href="${link}" target="_blank">${link}</a></p>`;
+  });
+  links.innerHTML=html;
 }
 </script>
 
