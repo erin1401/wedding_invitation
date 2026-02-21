@@ -89,6 +89,52 @@ body{
   }
 }
 
+.hero-text{
+  text-align:center;
+  padding:80px 20px;
+}
+
+.bismillah{
+  font-size:20px;
+  letter-spacing:3px;
+  color:#d4af37;
+  margin-bottom:30px;
+}
+
+.couple{
+  font-size:46px;
+  font-family: "Playfair Display", serif;
+  color:#ffd700;
+  line-height:1.6;
+}
+
+.subtitle{
+  margin-top:30px;
+  font-size:18px;
+  opacity:0.9;
+}
+
+.event{
+  text-align:center;
+  padding:60px 20px;
+}
+
+.event h2{
+  color:#ffd700;
+  margin-top:40px;
+}
+
+.quote{
+  text-align:center;
+  font-style:italic;
+  padding:70px 40px;
+  background:rgba(0,0,0,0.4);
+}
+
+.closing{
+  text-align:center;
+  padding:80px 20px;
+}
 /* ===== GALERI ===== */
 .gallery{
   display:flex;
