@@ -1,42 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Wedding Invitation</title>
-
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- GATE -->
+<!-- ================= GATE ================= -->
 <div id="gate">
   <div class="door leftDoor"></div>
   <div class="door rightDoor"></div>
 </div>
 
-<audio id="music" autoplay loop>
+<!-- WAYANG -->
+<div class="wayang left"></div>
+<div class="wayang right"></div>
+
+<!-- MUSIC -->
+<audio autoplay loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_keroncong-gamelan.mp3">
 </audio>
 
+<!-- HERO -->
 <section class="hero">
   <h1>Rama & Sinta</h1>
   <p>Kepada Yth</p>
   <h2 id="guestName"></h2>
-  <p id="countdown"></p>
+  <div id="countdown"></div>
 </section>
 
+<!-- GALERI -->
+<section>
+  <h2>Galeri</h2>
+  <div class="gallery">
+    <img src="https://picsum.photos/400/600?1">
+    <img src="https://picsum.photos/400/600?2">
+    <img src="https://picsum.photos/400/600?3">
+  </div>
+</section>
+
+<!-- RSVP -->
 <section class="card">
-  <h2>Akad & Resepsi</h2>
-  <p>10 Agustus 2026</p>
+  <h2>RSVP</h2>
+  <button onclick="rsvp('Hadir')">Hadir</button>
+  <button onclick="rsvp('Tidak')">Tidak</button>
+  <p id="rsvpText"></p>
 </section>
 
+<!-- BUKU TAMU -->
+<section class="card">
+  <h2>Buku Tamu</h2>
+  <input id="nama" placeholder="Nama">
+  <textarea id="ucapan" placeholder="Ucapan"></textarea>
+  <button onclick="kirim()">Kirim</button>
+  <div id="list"></div>
+</section>
+
+<!-- GENERATOR -->
 <section class="card">
   <h2>Generator Link</h2>
-  <input id="gen">
+  <input id="gen" placeholder="Nama Tamu">
   <button onclick="generate()">Generate</button>
   <p id="link"></p>
+</section>
+
+<!-- DASHBOARD -->
+<section class="card admin">
+  <h2>Dashboard</h2>
+  <p>Total Tamu: <span id="totalGuest">0</span></p>
+  <p>Hadir: <span id="hadir">0</span></p>
+  <p>Tidak Hadir: <span id="tidak">0</span></p>
 </section>
 
 <script src="script.js"></script>
