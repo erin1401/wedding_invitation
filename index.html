@@ -1,70 +1,68 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Wedding Invitation</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Undangan Pernikahan</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
 
-<!-- ================= PINTU KERATON ================= -->
-<div id="gate">
-  <div class="door leftDoor"></div>
-  <div class="door rightDoor"></div>
-</div>
+<!-- ========= OPENING KERATON ========= -->
+<section id="opening" class="opening">
 
-<!-- WAYANG -->
-<div class="wayang left"></div>
-<div class="wayang right"></div>
+  <div class="door-wrapper">
 
-<!-- MUSIC -->
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_keroncong-gamelan.mp3">
-</audio>
+    <!-- pintu kiri -->
+    <img src="assets/img/keraton-door.png" class="door door-left">
 
-<!-- HERO -->
-<section class="hero">
-  <h1>Rama & Sinta</h1>
-  <p>Kepada Yth</p>
-  <h2 id="guestName"></h2>
-  <p id="countdown"></p>
+    <!-- pintu kanan -->
+    <img src="assets/img/keraton-door.png" class="door door-right">
+
+    <button id="enterBtn">Masuk Undangan</button>
+  </div>
+
 </section>
 
-<!-- ACARA -->
-<section class="card">
-  <h2>Akad & Resepsi</h2>
-  <p>Minggu, 10 Agustus 2026</p>
-  <p>Ballroom Hotel</p>
-</section>
 
-<!-- GALERI -->
-<section>
+<!-- ========= MAIN CONTENT ========= -->
+<section id="main" class="hidden">
+
+  <!-- WAYANG -->
+  <img src="assets/img/wayang-left.png" class="wayang wayang-left">
+  <img src="assets/img/wayang-right.png" class="wayang wayang-right">
+
+  <!-- bunga jatuh -->
+  <div id="flowers"></div>
+
+  <h1 class="title">Ari & Dina</h1>
+  <p id="guestName" class="guest"></p>
+
+  <!-- GALERI -->
   <h2>Galeri</h2>
   <div class="gallery">
-    <img src="https://picsum.photos/400/600?1">
-    <img src="https://picsum.photos/400/600?2">
-    <img src="https://picsum.photos/400/600?3">
+    <img src="assets/img/foto1.jpg">
+    <img src="assets/img/foto2.jpg">
+    <img src="assets/img/foto3.jpg">
   </div>
-</section>
 
-<!-- RSVP -->
-<section class="card">
+  <!-- RSVP -->
   <h2>RSVP</h2>
-  <button onclick="rsvp('Hadir')">Hadir</button>
-  <button onclick="rsvp('Tidak')">Tidak</button>
-  <p id="rsvpText"></p>
+  <form id="rsvpForm">
+    <input id="name" placeholder="Nama">
+    <select id="status">
+      <option value="Hadir">Hadir</option>
+      <option value="Tidak Hadir">Tidak Hadir</option>
+    </select>
+    <textarea id="msg" placeholder="Ucapan"></textarea>
+    <button>Kirim</button>
+  </form>
+
+  <ul id="guestbook"></ul>
+
 </section>
 
-<!-- BUKU TAMU -->
-<section class="card">
-  <h2>Buku Tamu</h2>
-  <input id="nama" placeholder="Nama">
-  <textarea id="ucapan" placeholder="Ucapan"></textarea>
-  <button onclick="kirim()">Kirim</button>
-  <div id="list"></div>
-</section>
+<audio id="music" src="assets/music.mp3" loop></audio>
 
 <script src="script.js"></script>
 </body>
