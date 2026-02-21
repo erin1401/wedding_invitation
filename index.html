@@ -4,73 +4,136 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Wedding Invitation</title>
+<title>Luxury 3D Wedding Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --gold:#c9a24d;
-  --rose:#e9d8d0;
-  --white:#ffffff;
+  --rose:#f3e7e3;
 }
 
 *{
   margin:0;
   padding:0;
-  font-family:'Segoe UI',sans-serif;
   box-sizing:border-box;
 }
 
 body{
-  background:linear-gradient(135deg,var(--rose),#fff);
-  color:#444;
+  font-family:'Playfair Display',serif;
+  background:#fff;
   overflow-x:hidden;
+  perspective:1200px;
 }
 
-/* ===== OPENING ===== */
-#opening{
-  position:fixed;
+/* ===================== */
+/* 3D HERO SCENE */
+/* ===================== */
+
+.scene{
+  height:100vh;
+  position:relative;
+  transform-style:preserve-3d;
+  overflow:hidden;
+}
+
+/* background depth layers */
+.layer{
+  position:absolute;
   inset:0;
-  background:url("https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1920") center/cover;
+  background-size:cover;
+  background-position:center;
+  transform:translateZ(-200px) scale(1.4);
+  filter:brightness(.8);
+}
+
+/* door animation */
+.door{
+  position:absolute;
+  inset:0;
   display:flex;
+}
+
+.door div{
+  flex:1;
+  background:url("https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1920") center/cover;
+  transform-origin:left;
+}
+
+.left{
+  animation:openLeft 4s ease forwards;
+}
+
+.right{
+  animation:openRight 4s ease forwards;
+}
+
+@keyframes openLeft{
+  to{transform:rotateY(-90deg)}
+}
+@keyframes openRight{
+  to{transform:rotateY(90deg)}
+}
+
+/* title */
+.title{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   color:white;
-  z-index:1000;
-}
-
-#opening button{
-  background:var(--gold);
-  border:none;
-  padding:14px 30px;
-  border-radius:30px;
-  color:white;
-}
-
-/* ===== SECTION ===== */
-.section{
-  padding:70px 20px;
   text-align:center;
 }
 
+.title h1{
+  font-family:'Great Vibes';
+  font-size:64px;
+  color:var(--gold);
+  text-shadow:0 0 25px rgba(201,162,77,.6);
+}
+
+/* ===================== */
+/* sections */
+/* ===================== */
+
+.section{
+  padding:80px 20px;
+  text-align:center;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1.2s;
+}
+
+.section.show{
+  opacity:1;
+  transform:none;
+}
+
 .card{
-  background:var(--white);
-  padding:25px;
+  background:#fff;
+  padding:30px;
   border-radius:20px;
   max-width:500px;
   margin:auto;
-  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+  box-shadow:0 12px 35px rgba(0,0,0,.08);
 }
 
 button{
   background:var(--gold);
-  border:none;
   color:white;
+  border:none;
   padding:10px 18px;
   border-radius:10px;
   margin:6px;
 }
 
-/* ===== GALLERY ===== */
+/* ===================== */
+/* gallery 3D */
+/* ===================== */
+
 .gallery{
   display:flex;
   gap:10px;
@@ -78,23 +141,29 @@ button{
 }
 
 .gallery img{
-  height:180px;
-  border-radius:12px;
+  height:190px;
+  border-radius:14px;
+  transition:.4s;
 }
 
-/* ===== ADMIN ===== */
-#admin{
-  display:none;
-  padding:20px;
-  background:white;
-  margin:30px;
-  border-radius:12px;
+.gallery img:hover{
+  transform:scale(1.08);
 }
 
-textarea,input{
-  width:100%;
-  padding:8px;
-  margin:5px 0;
+/* petals */
+.petal{
+  position:fixed;
+  top:-10px;
+  width:12px;
+  height:12px;
+  background:#fff;
+  border-radius:50%;
+  opacity:.7;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg)}
 }
 
 #musicBtn{
@@ -107,153 +176,110 @@ textarea,input{
 
 <body>
 
-<!-- OPENING -->
-<div id="opening">
-  <button onclick="start()">Buka Undangan</button>
+<!-- 3D CINEMATIC SCENE -->
+<div class="scene">
+  <div class="layer"></div>
+
+  <div class="door">
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
+
+  <div class="title">
+    <h1>Wedding Day</h1>
+    <h2 id="guest"></h2>
+  </div>
 </div>
+
 
 <button id="musicBtn" onclick="toggleMusic()">🔊</button>
 
 <audio id="music" loop autoplay>
-  <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_9c9a9b5c06.mp3">
+<source src="https://cdn.pixabay.com/audio/2022/10/25/audio_9c9a9b5c06.mp3">
 </audio>
 
-<!-- HERO -->
-<section class="section">
-  <h1 style="color:#c9a24d">Wedding Day</h1>
-  <h2 id="guest"></h2>
-</section>
 
 <!-- COUNTDOWN -->
 <section class="section card">
-  <h3>Menuju Hari Bahagia</h3>
-  <h2 id="countdown"></h2>
-</section>
-
-<!-- EVENT -->
-<section class="section card">
-  <p>12 Januari 2026</p>
-  <p>Gedung Serbaguna Bahagia</p>
+<h3>Menuju Hari Bahagia</h3>
+<h2 id="countdown"></h2>
 </section>
 
 <!-- GALLERY -->
 <section class="section">
-  <div class="gallery">
-    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486">
-    <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde">
-    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc">
-  </div>
-</section>
-
-<!-- MAP -->
-<section class="section card">
-  <h3>Lokasi</h3>
-  <iframe
-  src="https://maps.google.com/maps?q=jakarta&t=&z=13&ie=UTF8&iwloc=&output=embed"
-  width="100%" height="250" style="border-radius:12px;border:0"></iframe>
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486">
+<img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde">
+<img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc">
+</div>
 </section>
 
 <!-- RSVP -->
 <section class="section card">
-  <h3>Konfirmasi Kehadiran</h3>
-  <button onclick="rsvp('Hadir')">Hadir</button>
-  <button onclick="rsvp('Tidak Hadir')">Tidak Hadir</button>
-  <p id="msg"></p>
+<button onclick="rsvp('Hadir')">Hadir</button>
+<button onclick="rsvp('Tidak Hadir')">Tidak Hadir</button>
+<p id="msg"></p>
 </section>
 
-<!-- BUKU TAMU -->
+<!-- WISH -->
 <section class="section card">
-  <h3>Ucapan & Doa</h3>
-  <input id="wishName" placeholder="Nama">
-  <textarea id="wishText" placeholder="Tulis ucapan..."></textarea>
-  <button onclick="sendWish()">Kirim</button>
+<input id="wishName" placeholder="Nama">
+<textarea id="wishText" placeholder="Ucapan..."></textarea>
+<button onclick="sendWish()">Kirim</button>
 </section>
-
-<!-- ADMIN LOGIN -->
-<section class="section">
-  <button onclick="login()">Admin</button>
-</section>
-
-<div id="admin">
-  <h3>Generator Link Tamu</h3>
-  <textarea id="names" placeholder="Andi&#10;Ibu Sari"></textarea>
-  <button onclick="generate()">Generate Link</button>
-  <div id="links"></div>
-</div>
 
 <script>
-/* ===== SETUP ===== */
-const params=new URLSearchParams(location.search);
-const guest=params.get("to")||"Tamu Undangan";
-document.getElementById("guest").innerText=guest;
+/* ===== typing guest ===== */
+const guestName=new URLSearchParams(location.search).get("to")||"Tamu Undangan";
+let i=0;
+function type(){
+  if(i<guestName.length){
+    guest.innerHTML+=guestName[i++];
+    setTimeout(type,60);
+  }
+}
+type();
 
-/* GANTI DENGAN URL GOOGLE APPS SCRIPT */
-const scriptURL="PASTE_URL_WEB_APP_DISINI";
+/* ===== reveal ===== */
+setTimeout(()=>{
+  document.querySelectorAll(".section").forEach((s,i)=>{
+    setTimeout(()=>s.classList.add("show"),i*500);
+  });
+},4500);
 
-/* ===== OPENING ===== */
-function start(){
-  document.getElementById("opening").style.display="none";
-  music.play();
+/* ===== petals ===== */
+for(let i=0;i<25;i++){
+  const p=document.createElement("div");
+  p.className="petal";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(p);
 }
 
-/* ===== MUSIC ===== */
+/* ===== music ===== */
 const music=document.getElementById("music");
 function toggleMusic(){
   music.paused?music.play():music.pause();
 }
 
-/* ===== COUNTDOWN ===== */
-const target=new Date("2026-01-12").getTime();
+/* ===== countdown ===== */
+const target=new Date("2026-04-04").getTime();
 setInterval(()=>{
   const d=Math.floor((target-Date.now())/86400000);
-  document.getElementById("countdown").innerText=d+" hari lagi";
+  countdown.innerText=d+" hari lagi";
 },1000);
 
-/* ===== RSVP ===== */
+/* ===== Google Sheet ===== */
+const scriptURL="https://docs.google.com/spreadsheets/d/1fZl4YNjqMnePEVRAIrdlHMXLwOLKjCL7cUixdsdci9c/edit?gid=0#gid=0";
+
 function rsvp(status){
-  fetch(scriptURL,{
-    method:"POST",
-    body:JSON.stringify({
-      type:"rsvp",
-      nama:guest,
-      status:status
-    })
-  });
+  fetch(scriptURL,{method:"POST",body:JSON.stringify({type:"rsvp",nama:guestName,status})});
   msg.innerText="Terima kasih 💛";
 }
 
-/* ===== WISH ===== */
 function sendWish(){
-  fetch(scriptURL,{
-    method:"POST",
-    body:JSON.stringify({
-      type:"wish",
-      nama:wishName.value,
-      pesan:wishText.value
-    })
-  });
-  alert("Ucapan terkirim");
-}
-
-/* ===== ADMIN LOGIN ===== */
-function login(){
-  const pass=prompt("Password admin:");
-  if(pass==="1234"){   /* ganti password */
-    admin.style.display="block";
-  }
-}
-
-/* ===== GENERATOR ===== */
-function generate(){
-  const base=location.origin+location.pathname+"?to=";
-  const names=document.getElementById("names").value.split("\n");
-  let html="";
-  names.forEach(n=>{
-    if(!n.trim()) return;
-    const link=base+encodeURIComponent(n);
-    html+=`<p>${n}<br><a href="${link}" target="_blank">${link}</a></p>`;
-  });
-  links.innerHTML=html;
+  fetch(scriptURL,{method:"POST",body:JSON.stringify({type:"wish",nama:wishName.value,pesan:wishText.value})});
+  alert("Terkirim");
 }
 </script>
 
