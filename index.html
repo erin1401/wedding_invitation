@@ -1,93 +1,44 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 <title>Wedding Invitation</title>
 
 <link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- ================= GATE OPENING ================= -->
+<!-- GATE -->
 <div id="gate">
   <div class="door leftDoor"></div>
   <div class="door rightDoor"></div>
-  <div class="glow"></div>
 </div>
 
-<!-- MUSIC -->
 <audio id="music" autoplay loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_keroncong-gamelan.mp3">
 </audio>
 
-<!-- WAYANG -->
-<img class="wayang left" src="https://i.imgur.com/NV8pO3g.png">
-<img class="wayang right" src="https://i.imgur.com/NV8pO3g.png">
-
-<!-- HERO -->
 <section class="hero">
   <h1>Rama & Sinta</h1>
-  <p class="kepada">Kepada Yth</p>
+  <p>Kepada Yth</p>
   <h2 id="guestName"></h2>
-  <div id="countdown"></div>
+  <p id="countdown"></p>
 </section>
 
-<!-- ACARA -->
-<section class="section card">
+<section class="card">
   <h2>Akad & Resepsi</h2>
-  <p>Minggu, 10 Agustus 2026</p>
-  <p>Ballroom Hotel</p>
+  <p>10 Agustus 2026</p>
 </section>
 
-<!-- GALERI -->
-<section>
-  <h2>Gallery</h2>
-  <div class="gallery">
-    <img src="https://picsum.photos/400/600?1">
-    <img src="https://picsum.photos/400/600?2">
-    <img src="https://picsum.photos/400/600?3">
-  </div>
-</section>
-
-<!-- MAP -->
-<section>
-  <h2>Lokasi</h2>
-  <iframe
-  src="https://maps.google.com/maps?q=hotel&t=&z=15&ie=UTF8&iwloc=&output=embed"
-  width="90%" height="300"></iframe>
-</section>
-
-<!-- RSVP -->
-<section class="card">
-  <h2>RSVP</h2>
-  <button onclick="rsvp('Hadir')" class="btn">Hadir</button>
-  <button onclick="rsvp('Tidak')" class="btn">Tidak</button>
-  <p id="rsvpText"></p>
-</section>
-
-<!-- BUKU TAMU -->
-<section class="card">
-  <h2>Buku Tamu</h2>
-  <input id="nama" placeholder="Nama">
-  <textarea id="ucapan" placeholder="Ucapan"></textarea>
-  <button onclick="kirim()" class="btn">Kirim</button>
-  <div id="list"></div>
-</section>
-
-<!-- GENERATOR -->
 <section class="card">
   <h2>Generator Link</h2>
-  <input id="gen" placeholder="Nama Tamu">
-  <button onclick="generate()" class="btn">Generate</button>
+  <input id="gen">
+  <button onclick="generate()">Generate</button>
   <p id="link"></p>
 </section>
 
 <script src="script.js"></script>
-
 </body>
 </html>
