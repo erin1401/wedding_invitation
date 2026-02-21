@@ -1,63 +1,51 @@
-window.onload=()=>{
-  openGate();
-  showGuest();
-  startCountdown();
-  createFlowers();
-  show();
+const enterBtn = document.getElementById("enterBtn");
+const opening = document.getElementById("opening");
+const main = document.getElementById("main");
+const music = document.getElementById("music");
+
+/* buka pintu */
+enterBtn.onclick = () => {
+  opening.classList.add("open");
+
+  setTimeout(()=>{
+    opening.style.display="none";
+    main.classList.remove("hidden");
+    music.play();
+  },1800);
 };
 
-/* pintu */
-function openGate(){
-  const gate=document.getElementById("gate");
-  setTimeout(()=>gate.classList.add("open"),800);
-  setTimeout(()=>gate.remove(),3000);
-}
-
-/* nama tamu */
-function showGuest(){
-  let name=new URLSearchParams(location.search).get("to")||"Tamu Undangan";
-  document.getElementById("guestName").innerText=name;
-}
-
-/* countdown */
-function startCountdown(){
-  let target=new Date("Aug 10 2026").getTime();
-  setInterval(()=>{
-    let d=target-new Date().getTime();
-    let day=Math.floor(d/(1000*60*60*24));
-    document.getElementById("countdown").innerText=day+" hari lagi";
-  },1000);
-}
 
 /* bunga jatuh */
-function createFlowers(){
-  for(let i=0;i<25;i++){
-    let f=document.createElement("div");
-    f.className="flower";
-    f.style.left=Math.random()*100+"vw";
-    f.style.animationDuration=(6+Math.random()*6)+"s";
-    document.body.appendChild(f);
-  }
-}
+const flowers = document.getElementById("flowers");
+
+setInterval(()=>{
+  const f = document.createElement("div");
+  f.className="flower";
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=(5+Math.random()*5)+"s";
+  flowers.appendChild(f);
+
+  setTimeout(()=>f.remove(),10000);
+},400);
+
+
+/* nama tamu */
+const urlParams = new URLSearchParams(window.location.search);
+document.getElementById("guestName").innerText =
+  "Kepada: "+ (urlParams.get("to") || "Tamu Undangan");
+
 
 /* RSVP */
-function rsvp(v){
-  localStorage.setItem("rsvp",v);
-  document.getElementById("rsvpText").innerText="Terima kasih sudah konfirmasi ❤️";
-}
+const form = document.getElementById("rsvpForm");
+const guestbook = document.getElementById("guestbook");
 
-/* buku tamu */
-let data=JSON.parse(localStorage.getItem("guest"))||[];
+form.onsubmit = (e)=>{
+  e.preventDefault();
 
-function kirim(){
-  let nama=document.getElementById("nama").value;
-  let u=document.getElementById("ucapan").value;
-  data.push({nama,ucapan:u});
-  localStorage.setItem("guest",JSON.stringify(data));
-  show();
-}
+  const li = document.createElement("li");
+  li.innerText =
+    name.value + " ("+status.value+") : "+ msg.value;
 
-function show(){
-  let list=document.getElementById("list");
-  list.innerHTML=data.map(d=>"<p>"+d.nama+" : "+d.ucapan+"</p>").join("");
-}
+  guestbook.appendChild(li);
+  form.reset();
+};
